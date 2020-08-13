@@ -1,0 +1,8 @@
+rootProject.name = 'licensed-tennis-matches'
+include "platform"
+include "service"
+include "service:domain-model"
+include "service:domain-business"
+include "service:adapter-rest"
+include "service:application"
+

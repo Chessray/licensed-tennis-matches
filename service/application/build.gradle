@@ -1,0 +1,30 @@
+apply plugin: "org.springframework.boot"
+apply plugin: "com.bmuschko.docker-spring-boot-application"
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter"
+    runtimeOnly project(":service:adapter-rest")
+    runtimeOnly "org.springframework.boot:spring-boot-starter-actuator"
+
+    testImplementation project(":service:domain-business")
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+}
+
+jar { enabled = true }
+bootJar {
+    enabled = true
+
+    manifest {
+        attributes 'Start-Class': "co.uk.kleindelao.demo.tennis.Application"
+    }
+}
+
+springBoot {
+    buildInfo()
+}
+
+docker {
+    springBootApplication {
+        baseImage = 'openjdk:11-jre'
+    }
+}

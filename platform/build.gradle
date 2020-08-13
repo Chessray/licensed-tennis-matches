@@ -1,0 +1,22 @@
+plugins {
+    id 'java-platform'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    api platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    constraints {
+        api "org.immutables:value:${immutablesVersion}"
+        api "org.mapstruct:mapstruct:${mapstructVersion}"
+        api "io.springfox:springfox-boot-starter:${springfoxVersion}"
+        api "com.tngtech.archunit:archunit-junit5-api:${archUnitVersion}"
+        runtime "com.tngtech.archunit:archunit-junit5-engine:${archUnitVersion}"
+    }
+}

@@ -1,0 +1,33 @@
+plugins {
+    id "org.springframework.boot" version "${springBootVersion}" apply false
+    id "com.bmuschko.docker-spring-boot-application" version "${dockerPluginVersion}" apply false
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: "java-library"
+
+    dependencies {
+        api platform(project(':platform'))
+
+        testImplementation "org.junit.jupiter:junit-jupiter-api"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+        testImplementation "org.assertj:assertj-core"
+    }
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    test {
+        useJUnitPlatform()
+
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+}

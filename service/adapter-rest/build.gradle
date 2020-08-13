@@ -1,0 +1,15 @@
+dependencies {
+    implementation project(":service:domain-business")
+    implementation "org.immutables:value"
+    annotationProcessor "org.immutables:value:${immutablesVersion}"
+
+    api "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.mapstruct:mapstruct"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    implementation "io.springfox:springfox-boot-starter"
+
+    testImplementation "org.mockito:mockito-core"
+    testImplementation "org.mockito:mockito-junit-jupiter"
+    testImplementation "com.tngtech.archunit:archunit-junit5-api"
+    testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine"
+}

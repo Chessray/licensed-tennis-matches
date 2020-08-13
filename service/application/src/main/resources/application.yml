@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: "licensed-tennis-matches"
+
+server:
+  port: 8080
+  servlet:
+    context-path: "/tennis/v1"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: shutdown
+      base-path: "/actuator"
