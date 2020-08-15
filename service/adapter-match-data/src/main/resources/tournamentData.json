@@ -1,0 +1,93 @@
+{
+  "customers": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    }
+  ],
+  "players": [
+    {
+      "id": "aadac15a-17ef-4108-9d42-56d1c6057918",
+      "name": "Roger Federer"
+    },
+    {
+      "id": "e9f5a4fc-3658-4cfa-b2ac-4b01a1f7b5d1",
+      "name": "Novak Djokovic"
+    },
+    {
+      "id": "0f38ea72-2d9e-4d7d-ba18-e4be6119da45",
+      "name": "Alexander Zverev"
+    },
+    {
+      "id": "7db5c54b-db3c-4f8e-8f4f-02e7fc82031b",
+      "name": "Rafael Nadal"
+    }
+  ],
+  "tournaments": [
+    {
+      "name": "Wimbledon",
+      "licensees": [3],
+      "matches": [
+        {
+          "id": "8d86b72e-79ee-4e46-9c62-66e7974b6252",
+          "playerA": "aadac15a-17ef-4108-9d42-56d1c6057918",
+          "playerB": "e9f5a4fc-3658-4cfa-b2ac-4b01a1f7b5d1",
+          "startDate": "2021-07-03T10:00:00Z",
+          "licensees": [1, 2]
+        },
+        {
+          "id": "c2ef67b4-c7f5-428d-82db-2732e4b46343",
+          "playerA": "0f38ea72-2d9e-4d7d-ba18-e4be6119da45",
+          "playerB": "7db5c54b-db3c-4f8e-8f4f-02e7fc82031b",
+          "startDate": "2021-07-04T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "name": "French Open",
+      "matches": [
+        {
+          "id": "6311bd17-e226-4c93-8fc9-a7a8e316d547",
+          "playerA": "aadac15a-17ef-4108-9d42-56d1c6057918",
+          "playerB": "7db5c54b-db3c-4f8e-8f4f-02e7fc82031b",
+          "startDate": "2021-09-03T09:30:00Z",
+          "licensees": [2]
+        },
+        {
+          "id": "0dde751c-ae3a-4438-b83d-69114341afb9",
+          "playerA": "0f38ea72-2d9e-4d7d-ba18-e4be6119da45",
+          "playerB": "e9f5a4fc-3658-4cfa-b2ac-4b01a1f7b5d1",
+          "startDate": "2021-09-04T15:45:00Z",
+          "licensees": [4]
+        }
+      ]
+    },
+    {
+      "name": "German Masters",
+      "licensees": [2, 4],
+      "matches": [
+        {
+          "id": "39725260-922c-45f3-a1a6-8b2926d9c8d9",
+          "playerB": "aadac15a-17ef-4108-9d42-56d1c6057918",
+          "playerA": "e9f5a4fc-3658-4cfa-b2ac-4b01a1f7b5d1",
+          "startDate": "2021-10-03T11:00:00Z"
+        },
+        {
+          "id": "7fde323c-a5d9-4034-b2c8-93fbaad728bd",
+          "playerA": "7db5c54b-db3c-4f8e-8f4f-02e7fc82031b",
+          "playerB": "0f38ea72-2d9e-4d7d-ba18-e4be6119da45",
+          "startDate": "2021-10-04T14:00:00Z",
+          "licensees": [1]
+        }
+      ]
+    }
+  ]
+}
