@@ -3,5 +3,8 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
     implementation "org.immutables:value"
+    implementation "com.google.guava:guava"
+    implementation "org.mapstruct:mapstruct"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.immutables:value:${immutablesVersion}"
 }

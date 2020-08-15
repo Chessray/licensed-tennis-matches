@@ -18,5 +18,6 @@ dependencies {
         api "io.springfox:springfox-boot-starter:${springfoxVersion}"
         api "com.tngtech.archunit:archunit-junit5-api:${archUnitVersion}"
         runtime "com.tngtech.archunit:archunit-junit5-engine:${archUnitVersion}"
+        api "com.google.guava:guava:${guavaVersion}"
     }
 }
