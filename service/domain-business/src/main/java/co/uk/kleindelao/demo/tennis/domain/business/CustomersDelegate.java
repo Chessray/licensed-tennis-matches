@@ -14,7 +14,7 @@ public class CustomersDelegate {
     this.persistencePort = persistencePort;
   }
 
-  public Set<Match> getMatchesforCustomerWithId(final CustomerId customerId) {
+  public Set<Match> getMatchesForCustomerWithId(final CustomerId customerId) {
     return persistencePort.getMatchesForCustomer(
         ImmutableCustomer.builder().setCustomerId(customerId).build());
   }

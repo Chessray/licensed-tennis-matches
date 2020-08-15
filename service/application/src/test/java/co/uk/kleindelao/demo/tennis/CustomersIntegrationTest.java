@@ -46,7 +46,7 @@ public class CustomersIntegrationTest {
     final var playerB = "Djokovic";
     final var startDate = ZonedDateTime.of(LocalDateTime.of(2020, 7, 23, 12, 56, 42, 451421), UTC);
     given(
-            customersDelegate.getMatchesforCustomerWithId(
+            customersDelegate.getMatchesForCustomerWithId(
                 ImmutableCustomerId.builder().setId(customerIdValue).build()))
         .willReturn(
             Set.of(

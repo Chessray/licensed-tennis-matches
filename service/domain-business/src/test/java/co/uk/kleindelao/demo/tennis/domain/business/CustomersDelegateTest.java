@@ -44,7 +44,7 @@ class CustomersDelegateTest {
         .willReturn(matches);
 
     // When
-    final var result = delegate.getMatchesforCustomerWithId(customerId);
+    final var result = delegate.getMatchesForCustomerWithId(customerId);
 
     // Then
     then(result).isEqualTo(matches);

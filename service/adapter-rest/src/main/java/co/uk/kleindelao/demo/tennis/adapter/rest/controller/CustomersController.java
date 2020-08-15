@@ -30,7 +30,7 @@ public class CustomersController {
   public ResponseEntity<List<MatchDto>> getMatchesForCustomer(final @PathVariable int customerId) {
     return ResponseEntity.ok(
         customersDelegate
-            .getMatchesforCustomerWithId(ImmutableCustomerId.builder().setId(customerId).build())
+            .getMatchesForCustomerWithId(ImmutableCustomerId.builder().setId(customerId).build())
             .stream()
             .map(matchMapper::toDto)
             .collect(toList()));

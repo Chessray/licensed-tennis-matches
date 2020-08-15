@@ -35,7 +35,7 @@ class CustomersControllerTest {
     // Given
     final var customerIdValue = 1;
     given(
-            customersDelegate.getMatchesforCustomerWithId(
+            customersDelegate.getMatchesForCustomerWithId(
                 ImmutableCustomerId.builder().setId(customerIdValue).build()))
         .willReturn(
             Set.of(
