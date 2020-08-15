@@ -1,13 +1,21 @@
 package co.uk.kleindelao.demo.tennis.domain.business;
 
 import co.uk.kleindelao.demo.tennis.domain.model.CustomerId;
+import co.uk.kleindelao.demo.tennis.domain.model.ImmutableCustomer;
 import co.uk.kleindelao.demo.tennis.domain.model.Match;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomersDelegate {
-    public Set<Match> getMatchesforCustomerWithId(final CustomerId customerId) {
-        throw new UnsupportedOperationException("Not yet implemented!");
-    }
+  private final MatchDataPort persistencePort;
+
+  public CustomersDelegate(final MatchDataPort persistencePort) {
+    this.persistencePort = persistencePort;
+  }
+
+  public Set<Match> getMatchesforCustomerWithId(final CustomerId customerId) {
+    return persistencePort.getMatchesForCustomer(
+        ImmutableCustomer.builder().setCustomerId(customerId).build());
+  }
 }

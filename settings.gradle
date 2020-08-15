@@ -5,4 +5,5 @@ include "service:domain-model"
 include "service:domain-business"
 include "service:adapter-rest"
 include "service:application"
+include "service:adapter-match-data"
 
