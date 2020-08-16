@@ -4,8 +4,9 @@ import static java.time.ZoneOffset.UTC;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -73,7 +74,7 @@ public class CustomersIntegrationTest {
         .andExpect(jsonPath("$[0].startDate", equalTo("2020-07-23T12:56:42.000451421Z")))
         .andExpect(jsonPath("$[0].playerA", equalTo(playerA)))
         .andExpect(jsonPath("$[0].playerB", equalTo(playerB)))
-        .andExpect(jsonPath("$[0].summary", nullValue()));
+        .andExpect(jsonPath("$[0]", not(hasProperty("summary"))));
   }
 
   @Test
