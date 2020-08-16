@@ -8,10 +8,12 @@ import co.uk.kleindelao.demo.tennis.adapter.rest.mapper.MatchMapper;
 import co.uk.kleindelao.demo.tennis.domain.business.CustomersDelegate;
 import co.uk.kleindelao.demo.tennis.domain.model.ImmutableCustomerId;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,12 +29,13 @@ public class CustomersController {
   }
 
   @GetMapping(path = "/{customerId}/matches", produces = APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<MatchDto>> getMatchesForCustomer(final @PathVariable int customerId) {
+  public ResponseEntity<List<MatchDto>> getMatchesForCustomer(
+      final @PathVariable int customerId, final @RequestParam Optional<String> summaryType) {
     return ResponseEntity.ok(
         customersDelegate
             .getMatchesForCustomerWithId(ImmutableCustomerId.builder().setId(customerId).build())
             .stream()
-            .map(matchMapper::toDto)
+            .map(match -> matchMapper.toDto(match, summaryType))
             .collect(toList()));
   }
 }

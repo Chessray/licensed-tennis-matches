@@ -7,6 +7,7 @@ dependencies {
     implementation "org.mapstruct:mapstruct"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     implementation "io.springfox:springfox-boot-starter"
+    implementation "net.time4j:time4j-base"
 
     testImplementation "org.mockito:mockito-core"
     testImplementation "org.mockito:mockito-junit-jupiter"

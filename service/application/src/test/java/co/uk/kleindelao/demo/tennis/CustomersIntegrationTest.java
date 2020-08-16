@@ -1,8 +1,12 @@
 package co.uk.kleindelao.demo.tennis;
 
 import static java.time.ZoneOffset.UTC;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.startsWith;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -42,8 +46,8 @@ public class CustomersIntegrationTest {
     // Given
     final var customerIdValue = 1;
     final var matchId = UUID.randomUUID();
-    final var playerA = "Federer";
-    final var playerB = "Djokovic";
+    final var playerA = "Roger Federer";
+    final var playerB = "Novak Djokovic";
     final var startDate = ZonedDateTime.of(LocalDateTime.of(2020, 7, 23, 12, 56, 42, 451421), UTC);
     given(
             customersDelegate.getMatchesForCustomerWithId(
@@ -68,6 +72,80 @@ public class CustomersIntegrationTest {
         .andExpect(jsonPath("$[0].matchId", equalTo(String.valueOf(matchId))))
         .andExpect(jsonPath("$[0].startDate", equalTo("2020-07-23T12:56:42.000451421Z")))
         .andExpect(jsonPath("$[0].playerA", equalTo(playerA)))
-        .andExpect(jsonPath("$[0].playerB", equalTo(playerB)));
+        .andExpect(jsonPath("$[0].playerB", equalTo(playerB)))
+        .andExpect(jsonPath("$[0].summary", nullValue()));
+  }
+
+  @Test
+  void shouldReturnSimpleSummaryForAvB() throws Exception {
+    // Given
+    final var customerIdValue = 1;
+    final var matchId = UUID.randomUUID();
+    final var playerA = "Roger Federer";
+    final var playerB = "Novak Djokovic";
+    final var startDate = ZonedDateTime.of(LocalDateTime.of(2020, 7, 23, 12, 56, 42, 451421), UTC);
+    given(
+            customersDelegate.getMatchesForCustomerWithId(
+                ImmutableCustomerId.builder().setId(customerIdValue).build()))
+        .willReturn(
+            Set.of(
+                ImmutableMatch.builder()
+                    .setId(ImmutableMatchId.builder().setId(matchId).build())
+                    .setStartDate(
+                        ImmutableMatchStartDateTime.builder()
+                            .setInstant(Instant.from(startDate))
+                            .build())
+                    .setPlayerA(ImmutablePlayer.builder().setName(playerA).build())
+                    .setPlayerB(ImmutablePlayer.builder().setName(playerB).build())
+                    .build()));
+
+    // When - Then
+    mockMvc
+        .perform(MockMvcRequestBuilders.get("/customers/1/matches?summaryType=AvB"))
+        .andDo(print())
+        .andExpect(jsonPath("$", instanceOf(JSONArray.class)))
+        .andExpect(jsonPath("$[0].matchId", equalTo(String.valueOf(matchId))))
+        .andExpect(jsonPath("$[0].startDate", equalTo("2020-07-23T12:56:42.000451421Z")))
+        .andExpect(jsonPath("$[0].playerA", equalTo(playerA)))
+        .andExpect(jsonPath("$[0].playerB", equalTo(playerB)))
+        .andExpect(jsonPath("$[0].summary", equalTo(playerA + " vs " + playerB)));
+  }
+
+  @Test
+  void shouldReturnSummaryWithTimeForAvBTime() throws Exception {
+    // Given
+    final var customerIdValue = 1;
+    final var matchId = UUID.randomUUID();
+    final var playerA = "Roger Federer";
+    final var playerB = "Novak Djokovic";
+    final var startDate = ZonedDateTime.of(LocalDateTime.of(2020, 7, 23, 12, 56, 42, 451421), UTC);
+    given(
+            customersDelegate.getMatchesForCustomerWithId(
+                ImmutableCustomerId.builder().setId(customerIdValue).build()))
+        .willReturn(
+            Set.of(
+                ImmutableMatch.builder()
+                    .setId(ImmutableMatchId.builder().setId(matchId).build())
+                    .setStartDate(
+                        ImmutableMatchStartDateTime.builder()
+                            .setInstant(Instant.from(startDate))
+                            .build())
+                    .setPlayerA(ImmutablePlayer.builder().setName(playerA).build())
+                    .setPlayerB(ImmutablePlayer.builder().setName(playerB).build())
+                    .build()));
+
+    // When - Then
+    mockMvc
+        .perform(MockMvcRequestBuilders.get("/customers/1/matches?summaryType=AvBTime"))
+        .andDo(print())
+        .andExpect(jsonPath("$", instanceOf(JSONArray.class)))
+        .andExpect(jsonPath("$[0].matchId", equalTo(String.valueOf(matchId))))
+        .andExpect(jsonPath("$[0].startDate", equalTo("2020-07-23T12:56:42.000451421Z")))
+        .andExpect(jsonPath("$[0].playerA", equalTo(playerA)))
+        .andExpect(jsonPath("$[0].playerB", equalTo(playerB)))
+        .andExpect(
+            jsonPath(
+                "$[0].summary",
+                allOf(startsWith(playerA + " vs " + playerB + ", started"), endsWith("ago"))));
   }
 }

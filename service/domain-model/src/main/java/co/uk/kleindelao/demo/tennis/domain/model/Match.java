@@ -12,4 +12,8 @@ public abstract class Match {
   public abstract Player getPlayerA();
 
   public abstract Player getPlayerB();
+
+  public final String getPairing() {
+    return getPlayerA().getName() + " vs " + getPlayerB().getName();
+  }
 }
