@@ -10,6 +10,7 @@ dependencies {
 
     testImplementation project(":service:domain-business")
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation project(":service:adapter-rest")
 }
 
 jar { enabled = true }
