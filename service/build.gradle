@@ -22,8 +22,11 @@ subprojects {
         testImplementation "org.mockito:mockito-junit-jupiter"
     }
 
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
+    }
 
     test {
         useJUnitPlatform()
